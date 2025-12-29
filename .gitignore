@@ -20,6 +20,7 @@
 /storage/pail
 /storage/app/firebase
 /vendor
+/resources/js/firebase.js
 Homestead.json
 Homestead.yaml
 Thumbs.db
