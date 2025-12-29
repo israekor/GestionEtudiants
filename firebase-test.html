@@ -1,0 +1,43 @@
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+    import {
+        getAuth,
+        signInWithPopup,
+        GoogleAuthProvider,
+    } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyDhyIurWeL-HhzEB8lVv-yHivdTpAVma9E",
+        authDomain: "gestion-ecole-88bfa.firebaseapp.com",
+        projectId: "gestion-ecole-88bfa",
+        storageBucket: "gestion-ecole-88bfa.firebasestorage.app",
+        messagingSenderId: "24842036318",
+        appId: "1:24842036318:web:6f2ecd21521417b05040cf",
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const provider = new GoogleAuthProvider();
+
+    document
+        .getElementById("googleLoginBtn")
+        .addEventListener("click", async () => {
+            try {
+                const result = await signInWithPopup(auth, provider);
+                const token = await result.user.getIdToken();
+
+                await fetch("{{ route('google.login') }}", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "X-CSRF-TOKEN": "{{ csrf_token() }}",
+                    },
+                    body: JSON.stringify({ token }),
+                });
+
+                window.location.href = "/dashboard";
+            } catch (error) {
+                console.error(error);
+            }
+        });
+</script>
