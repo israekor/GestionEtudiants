@@ -28,3 +28,7 @@ classique et connexion Google via Firebase.
 3. Configurer le fichier .env
 4. Lancer les migrations
 5. Démarrer le serveur
+
+⚠️ Le fichier de configuration Firebase (`firebase.js`) n’est pas versionné
+pour des raisons de sécurité.  
+Chaque utilisateur doit créer son propre fichier à partir de Firebase Console.
